@@ -70,7 +70,7 @@ wavyRectLab = 	ImageTk.PhotoImage(wavyRectIconImg.resize((		2*CANVAS_SCALER, 1*C
 canvasFrame = ttk.Frame(root,padding=CANVAS_PADDING)
 
 """Update Flowchart Canvas"""
-def update(flowchart=['']):
+def update(flowchart=[Read()]):
 	for i, item in enumerate(flowchart):
 		if(item.upper()==KEY_CIRCLE):
 			itemLabel = ttk.Label(canvasFrame, image=circleLab,		padding=CANVAS_ITEM_PADDING)
@@ -101,7 +101,7 @@ def update(flowchart=['']):
 #            ],
 #            [...],
 #        ]
-def updateAdv(flowchart=['']):
+def updateAdv(flowchart=[Read()]):
 	for itemSet in flowchart:
 		if(item[0]==KEY_CIRCLE):
 			itemLabel = ttk.Label(canvasFrame, image=circleIconLab,		padding=CANVAS_ITEM_PADDING)
@@ -120,7 +120,32 @@ def updateAdv(flowchart=['']):
 
 		itemLabel.grid(column=itemSet[1],row=itemSet[2])
 
+# Return contents from "Flowchartdata.txt" file into a list.
+def Read():
+    txtf = open("flowchartdata.txt","r")
+    file_content = txtf.read()
+    content_list = list(file_content)
+    txtf.close()
+    return content_list
 
+# Write key stroke to end of file, expects a variable to be passed through.
+def Write(key):
+    txtf = open("flowchartdata.txt","a")
+    z = key
+    txtf.write(z)
+    txtf.close()
+
+# Deletes last enty and rewrites list to file.
+def Delete():
+    txtf = open("flowchartdata.txt","r+")
+    file_content = txtf.read()
+    clst = list(file_content)
+    txtf.close()
+    del clst[len(clst)-1]
+    x = " ".join(clst)
+    txtf = open("flowchartdata.txt","w")
+    txtf.write(x)
+    txtf.close()
 
 
 """Tool Bar"""
