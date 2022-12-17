@@ -73,23 +73,23 @@ canvasFrame = ttk.Frame(root,padding=CANVAS_PADDING)
 def update(flowchart=[]):
 	for widget in canvasFrame.winfo_children():
 		widget.destroy()
-	for i, item in enumerate(flowchart):
-		if(item.upper()==KEY_CIRCLE):
-			itemLabel = ttk.Label(canvasFrame, image=circleLab,		padding=CANVAS_ITEM_PADDING)
-		elif(item.upper()==KEY_DIAMOND):
-			itemLabel = ttk.Label(canvasFrame, image=diamondLab,	padding=CANVAS_ITEM_PADDING)
-		elif(item.upper()==KEY_OVAL):
-			itemLabel = ttk.Label(canvasFrame, image=ovalLab,		padding=CANVAS_ITEM_PADDING)
-		elif(item.upper()==KEY_RECT):
-			itemLabel = ttk.Label(canvasFrame, image=rectLab,		padding=CANVAS_ITEM_PADDING)
-		elif(item.upper()==KEY_RISING_RECT):
-			itemLabel = ttk.Label(canvasFrame, image=risingRectLab,	padding=CANVAS_ITEM_PADDING)
-		elif(item.upper()==KEY_TRAPIZOID):
-			itemLabel = ttk.Label(canvasFrame, image=trapizoidLab,	padding=CANVAS_ITEM_PADDING)
-		elif(item.upper()==KEY_WAVY_RECT):
-			itemLabel = ttk.Label(canvasFrame, image=wavyRectLab,	padding=CANVAS_ITEM_PADDING)
-
-		itemLabel.grid(column=0,row=i)
+	if(flowchart):
+		for i, item in enumerate(flowchart):
+			if(item.upper()==KEY_CIRCLE):
+				itemLabel = ttk.Label(canvasFrame, image=circleLab,		padding=CANVAS_ITEM_PADDING)
+			elif(item.upper()==KEY_DIAMOND):
+				itemLabel = ttk.Label(canvasFrame, image=diamondLab,	padding=CANVAS_ITEM_PADDING)
+			elif(item.upper()==KEY_OVAL):
+				itemLabel = ttk.Label(canvasFrame, image=ovalLab,		padding=CANVAS_ITEM_PADDING)
+			elif(item.upper()==KEY_RECT):
+				itemLabel = ttk.Label(canvasFrame, image=rectLab,		padding=CANVAS_ITEM_PADDING)
+			elif(item.upper()==KEY_RISING_RECT):
+				itemLabel = ttk.Label(canvasFrame, image=risingRectLab,	padding=CANVAS_ITEM_PADDING)
+			elif(item.upper()==KEY_TRAPIZOID):
+				itemLabel = ttk.Label(canvasFrame, image=trapizoidLab,	padding=CANVAS_ITEM_PADDING)
+			elif(item.upper()==KEY_WAVY_RECT):
+				itemLabel = ttk.Label(canvasFrame, image=wavyRectLab,	padding=CANVAS_ITEM_PADDING)
+			itemLabel.grid(column=0,row=i)
 
 
 """Update (Advanced) Flowchart Canvas"""
@@ -106,31 +106,37 @@ def update(flowchart=[]):
 def updateAdv(flowchart=[]):
 	for widget in canvasFrame.winfo_children():
 		widget.destroy()
-	for itemSet in flowchart:
-		if(item[0]==KEY_CIRCLE):
-			itemLabel = ttk.Label(canvasFrame, image=circleIconLab,		padding=CANVAS_ITEM_PADDING)
-		elif(item[0]==KEY_DIAMOND):
-			itemLabel = ttk.Label(canvasFrame, image=diamondIconLab,	padding=CANVAS_ITEM_PADDING)
-		elif(item[0]==KEY_OVAL):
-			itemLabel = ttk.Label(canvasFrame, image=ovalIconLab,		padding=CANVAS_ITEM_PADDING)
-		elif(item[0]==KEY_RECT):
-			itemLabel = ttk.Label(canvasFrame, image=rectIconLab,		padding=CANVAS_ITEM_PADDING)
-		elif(item[0]==KEY_RISING_RECT):
-			itemLabel = ttk.Label(canvasFrame, image=risingRectIconLab,	padding=CANVAS_ITEM_PADDING)
-		elif(item[0]==KEY_TRAPIZOID):
-			itemLabel = ttk.Label(canvasFrame, image=trapizoidIconLab,	padding=CANVAS_ITEM_PADDING)
-		elif(item[0]==KEY_WAVY_RECT):
-			itemLabel = ttk.Label(canvasFrame, image=wavyRectIconLab,	padding=CANVAS_ITEM_PADDING)
+	if(flowchart):
+		for itemSet in flowchart:
+			if(item[0]==KEY_CIRCLE):
+				itemLabel = ttk.Label(canvasFrame, image=circleIconLab,		padding=CANVAS_ITEM_PADDING)
+			elif(item[0]==KEY_DIAMOND):
+				itemLabel = ttk.Label(canvasFrame, image=diamondIconLab,	padding=CANVAS_ITEM_PADDING)
+			elif(item[0]==KEY_OVAL):
+				itemLabel = ttk.Label(canvasFrame, image=ovalIconLab,		padding=CANVAS_ITEM_PADDING)
+			elif(item[0]==KEY_RECT):
+				itemLabel = ttk.Label(canvasFrame, image=rectIconLab,		padding=CANVAS_ITEM_PADDING)
+			elif(item[0]==KEY_RISING_RECT):
+				itemLabel = ttk.Label(canvasFrame, image=risingRectIconLab,	padding=CANVAS_ITEM_PADDING)
+			elif(item[0]==KEY_TRAPIZOID):
+				itemLabel = ttk.Label(canvasFrame, image=trapizoidIconLab,	padding=CANVAS_ITEM_PADDING)
+			elif(item[0]==KEY_WAVY_RECT):
+				itemLabel = ttk.Label(canvasFrame, image=wavyRectIconLab,	padding=CANVAS_ITEM_PADDING)
 
-		itemLabel.grid(column=itemSet[1],row=itemSet[2])
+			itemLabel.grid(column=itemSet[1],row=itemSet[2])
 
 # Return contents from "Flowchartdata.txt" file into a list.
 def Read():
-    txtf = open("flowchartdata.txt","r")
-    file_content = txtf.read()
-    content_list = list(file_content)
-    txtf.close()
-    return content_list
+	try:
+		txtf = open("flowchartdata.txt","r")
+		file_content = txtf.read()
+		content_list = list(file_content)
+		txtf.close()
+		return content_list
+	except:
+		open("flowchartdata.txt","w")#Create file if file doesn't exist
+		return []
+
 
 # Write key stroke to end of file, expects a variable to be passed through.
 def Write(key):
@@ -143,10 +149,10 @@ def Write(key):
 def Delete():
     txtf = open("flowchartdata.txt","r+")
     file_content = txtf.read()
-    clst = list(file_content)
-    txtf.close()
-    del clst[len(clst)-1]
-    x = " ".join(clst)
+    # clst = list(file_content)
+    # txtf.close()
+    # del clst[len(clst)-1]
+    x = file_content[:len(file_content)-1]
     txtf = open("flowchartdata.txt","w")
     txtf.write(x)
     txtf.close()
@@ -156,7 +162,8 @@ def Delete():
 
 
 def create_symbol(key):
-    pass
+	update(Read())
+    # pass
     # TODO: add calls to display functionality
 
 
@@ -197,6 +204,7 @@ def symbol_wavy_rect(event):
 
 def symbol_remove(event):
     Delete()
+    update(Read())
 
 
 """Bindings"""
@@ -263,13 +271,15 @@ wavyRectLabel.grid(		column=0,row=6)
 
 
 """ Load flowchart **For Testing Purposes** """
-update(flowchart)
-update(['r','e','t','w','y','w'])
-update(['w','r','y','q','w'])
+# update(flowchart)
+# update(['r','e','t','w','y','w'])
+# update(['w','r','y','q','w'])
 
 
 """Place frames in root"""
 toolsFrame.grid(column=0,row=0,sticky="NW")
 canvasFrame.grid(column=1,row=0,sticky="N")
+
+update(Read())
 
 root.mainloop()
