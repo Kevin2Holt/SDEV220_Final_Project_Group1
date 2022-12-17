@@ -13,10 +13,10 @@ TRAPIZOID = "./imgs/Trapizoid.png"
 WAVY_RECT = "./imgs/Wavy_Rect.png"
 #Easy-Change Settings
 TOOLS_ICON_PADDING = (2,5,5,5)#Left,Up,Right,Down
-TOOLS_BAR_SCALER = 40
+TOOLS_BAR_SCALER = 30
 CANVAS_PADDING =(10,5,5,5)#Left,Up,Right,Down
 CANVAS_ITEM_PADDING =(5,5,5,5)#Left,Up,Right,Down
-CANVAS_SCALER = 50
+CANVAS_SCALER = 45
 #Keybinds
 KEY_CIRCLE = 'Q'
 KEY_DIAMOND = 'W'
@@ -28,7 +28,7 @@ KEY_WAVY_RECT = 'U'
 
 
 #Test Variables
-flowchart = ['Q','w']
+flowchart = ['Q','w','e','w','t','r']
 
 #Declare root & set basic properties
 root = tk.Tk()
@@ -62,7 +62,7 @@ rectLab = 		ImageTk.PhotoImage(rectIconImg.resize((			2*CANVAS_SCALER, 1*CANVAS_
 risingRectLab = ImageTk.PhotoImage(risingRectIconImg.resize((	2*CANVAS_SCALER, 1*CANVAS_SCALER)))
 trapizoidLab = 	ImageTk.PhotoImage(trapizoidIconImg.resize((	2*CANVAS_SCALER, 1*CANVAS_SCALER)))
 wavyRectLab = 	ImageTk.PhotoImage(wavyRectIconImg.resize((		2*CANVAS_SCALER, 1*CANVAS_SCALER)))
-#For Canvas
+
 
 
 
@@ -70,7 +70,9 @@ wavyRectLab = 	ImageTk.PhotoImage(wavyRectIconImg.resize((		2*CANVAS_SCALER, 1*C
 canvasFrame = ttk.Frame(root,padding=CANVAS_PADDING)
 
 """Update Flowchart Canvas"""
-def update(flowchart=[Read()]):
+def update(flowchart=[]):
+	for widget in canvasFrame.winfo_children():
+		widget.destroy()
 	for i, item in enumerate(flowchart):
 		if(item.upper()==KEY_CIRCLE):
 			itemLabel = ttk.Label(canvasFrame, image=circleLab,		padding=CANVAS_ITEM_PADDING)
@@ -101,7 +103,9 @@ def update(flowchart=[Read()]):
 #            ],
 #            [...],
 #        ]
-def updateAdv(flowchart=[Read()]):
+def updateAdv(flowchart=[]):
+	for widget in canvasFrame.winfo_children():
+		widget.destroy()
 	for itemSet in flowchart:
 		if(item[0]==KEY_CIRCLE):
 			itemLabel = ttk.Label(canvasFrame, image=circleIconLab,		padding=CANVAS_ITEM_PADDING)
@@ -214,6 +218,7 @@ def startup():
         create_symbol(k)  # add appropriate symbols
 
 
+
 """Tool Bar"""
 toolsFrame = ttk.Frame(root,borderwidth=4,relief="solid")
 
@@ -256,9 +261,11 @@ wavyRectLabel.grid(		column=0,row=6)
 
 
 
+
 """ Load flowchart **For Testing Purposes** """
 update(flowchart)
-update(flowchart)
+update(['r','e','t','w','y','w'])
+update(['w','r','y','q','w'])
 
 
 """Place frames in root"""
