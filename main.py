@@ -148,6 +148,72 @@ def Delete():
     txtf.close()
 
 
+"""Bound Functions"""
+
+
+def create_symbol(key):
+    pass
+    # TODO: add calls to display functionality
+
+
+def symbol_circle(event):
+    Write(KEY_CIRCLE)
+    create_symbol(KEY_CIRCLE)
+
+
+def symbol_diamond(event):
+    Write(KEY_DIAMOND)
+    create_symbol(KEY_DIAMOND)
+
+
+def symbol_oval(event):
+    Write(KEY_OVAL)
+    create_symbol(KEY_OVAL)
+
+
+def symbol_rect(event):
+    Write(KEY_RECT)
+    create_symbol(KEY_RECT)
+
+
+def symbol_rising_rect(event):
+    Write(KEY_RISING_RECT)
+    create_symbol(KEY_RISING_RECT)
+
+
+def symbol_trapezoid(event):
+    Write(KEY_TRAPIZOID)
+    create_symbol(KEY_TRAPIZOID)
+
+
+def symbol_wavy_rect(event):
+    Write(KEY_WAVY_RECT)
+    create_symbol(KEY_WAVY_RECT)
+
+
+def symbol_remove(event):
+    Delete()
+
+
+"""Bindings"""
+root.bind("<KeyPress-q>", symbol_circle)
+root.bind("<KeyPress-w>", symbol_diamond)
+root.bind("<KeyPress-e>", symbol_oval)
+root.bind("<KeyPress-r>", symbol_rect)
+root.bind("<KeyPress-t>", symbol_rising_rect)
+root.bind("<KeyPress-y>", symbol_trapezoid)
+root.bind("<KeyPress-u>", symbol_wavy_rect)
+root.bind("<Return>", symbol_remove)
+
+"""Read data on startup"""
+
+
+def startup():
+    # read data from save file
+    for k in Read():
+        create_symbol(k)  # add appropriate symbols
+
+
 """Tool Bar"""
 toolsFrame = ttk.Frame(root,borderwidth=4,relief="solid")
 
