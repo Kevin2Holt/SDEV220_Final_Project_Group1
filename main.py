@@ -216,15 +216,13 @@ root.bind("<KeyPress-"+KEY_RECT.lower()+">", symbol_rect)
 root.bind("<KeyPress-"+KEY_RISING_RECT.lower()+">", symbol_rising_rect)
 root.bind("<KeyPress-"+KEY_TRAPEZOID.lower()+">", symbol_trapezoid)
 root.bind("<KeyPress-"+KEY_WAVY_RECT.lower()+">", symbol_wavy_rect)
-root.bind("<Return>", symbol_remove)
+root.bind("<BackSpace>", symbol_remove)
 
 """Read data on startup"""
 
-
-def startup():
-    # read data from save file
-    for k in Read():
-        create_symbol(k)  # add appropriate symbols
+# read data from save file
+for k in Read():
+    create_symbol(k)  # add appropriate symbols
 
 
 
